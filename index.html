@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>YAGPDB.xyz Embed Converter</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+
+<div class="jumbotron text-center" style="margin-bottom: 50px">
+    <h1>YAGPDB.xyz Embed Converter</h1>
+</div>
+
+<div class="container-fluid" style="max-width: 90%">
+    <div class="row">
+        <div class="form-group">
+            <label for="nameInputArea">Embed Name</label>
+            <input class="form-control" id="nameInputArea" placeholder="name">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <label for="inputTextArea">Input</label>
+            <textarea class="form-control" id="inputTextArea" rows="15"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label for="outputTextArea">Output</label>
+            <textarea class="form-control" id="outputTextArea" rows="15"></textarea>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <button class="btn btn-primary" onclick="convertJsonToYag()">Convert</button>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+</body>
+</html>
