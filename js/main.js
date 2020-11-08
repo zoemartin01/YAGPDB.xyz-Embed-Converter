@@ -35,7 +35,7 @@ function convert(s, name) {
             if (k === "name") authorOut += "\"" + k + "\" \"" + escape(val[k]) + "\" ";
             else if (k === "icon_url" || k === "url") authorOut += "\"" + k + "\" \"" + val[k] + "\" ";
         });
-        output += authorOut + ")\n"
+        if (val.hasOwnProperty('name')) output += authorOut + ")\n"
     }
 
     if (json.hasOwnProperty('thumbnail')) {
@@ -54,20 +54,31 @@ function convert(s, name) {
             if (k === "text") footerOut += "\"" + k + "\" \"" + escape(val[k]) + "\" ";
             else if (k === "icon_url") footerOut += "\"" + k + "\" \"" + val[k] + "\" "
         });
-        output += footerOut + ")\n"
+        if (val.hasOwnProperty('text')) output += footerOut + ")\n"
+    }
+
+    if (json.hasOwnProperty('image')) {
+        var imageOut = "\t\"image\" (sdict ";
+        const val = json['image'];
+        Object.keys(val).forEach(function (k) {
+            if (k === "url") imageOut += "\"" + k + "\" \"" + val[k] + "\" "
+        });
+        output += imageOut + ")\n"
     }
 
     if (json.hasOwnProperty('fields')) {
         var fieldsOut = "\t\"fields\" (cslice \n";
         const val = json['fields'];
         Object.keys(val).forEach(function (k) {
-            fieldsOut += "\t\t(sdict ";
-            const key = val[k];
-            Object.keys(key).forEach(function (c) {
-                if (c === "name" || c === "value") fieldsOut += "\"" + c + "\" \"" + escape(key[c]) + "\" ";
-                else if (c === "inline") fieldsOut += "\"" + c + "\" " + key[c] + " ";
-            });
-            fieldsOut += ")\n"
+            if (val[k].hasOwnProperty('name') && val[k].hasOwnProperty('value') && val[k].hasOwnProperty('inline')) {
+                fieldsOut += "\t\t(sdict ";
+                const key = val[k];
+                Object.keys(key).forEach(function (c) {
+                    if (c === "name" || c === "value") fieldsOut += "\"" + c + "\" \"" + escape(key[c]) + "\" ";
+                    else if (c === "inline") fieldsOut += "\"" + c + "\" " + key[c] + " ";
+                });
+                fieldsOut += ")\n"
+            }
         });
         output += fieldsOut + ")\n"
     }
